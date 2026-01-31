@@ -156,6 +156,8 @@ spring:
 
 **Mateus Amaral**  
 Analista de Suporte com mais de 10 anos de experiência, em transição para Desenvolvimento Back-End.
+- [Meu LinkedIn](https://linkedin.com/in/mateusamaral52/)
+- [Meu GitHub](https://github.com/mateusamaral52/)
 
 ---
 
