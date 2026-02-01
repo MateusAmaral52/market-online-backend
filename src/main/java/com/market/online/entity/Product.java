@@ -46,6 +46,18 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    public void update(String nameProduct,
+                       BigDecimal price,
+                       ProductCategory category,
+                       Integer stock,
+                       String imageUrl) {
+        this.nameProduct = nameProduct;
+        this.price = price;
+        this.category = category;
+        this.stock = stock;
+        this.imageUrl = imageUrl;
+    }
+
     // getters apenas (sem setters públicos)
     public Long getIdProduct() {
         return idProduct;

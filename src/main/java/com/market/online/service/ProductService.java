@@ -30,7 +30,7 @@ public class ProductService {
         Product existingProduct = findProductById(idProduct);
 
         // Atualizações controladas (sem setter público)
-        existingProduct = new Product(
+        existingProduct.update(
                 updatedProduct.getNameProduct(),
                 updatedProduct.getPrice(),
                 updatedProduct.getCategory(),
