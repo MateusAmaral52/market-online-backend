@@ -25,6 +25,13 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    //Impede valor zero para produto
+    private void validatePrice(BigDecimal price) {
+        if (price == null || price.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("O preço do Produto deve ser maior que zero!");
+        }
+    }
+
     //Controla estoque para não ser inserido nullo. Se não for preenchido salvar com Estoque 0.
     private int resolveStock(Integer stock) {
         return stock != null ? stock : 0;
@@ -35,13 +42,6 @@ public class ProductService {
             return 0;
         }
         */
-    }
-
-    //Impede valor zero para produto
-    private void validatePrice(BigDecimal price) {
-        if (price == null || price.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("O preço do Produto deve ser maior que zero!");
-        }
     }
 
     public List<Product> findAll(){
@@ -55,12 +55,17 @@ public class ProductService {
     public Product update(Long idProduct, Product updatedProduct){
         Product existingProduct = findById(idProduct);
 
+        //valida estoque - não pode ser vazio e nulo, então converte para zero
+        Integer stock = updatedProduct.getStock() != null
+                ? updatedProduct.getStock()
+                : existingProduct.getStock();
+
         // Atualizações controladas (sem setter público)
         existingProduct.updateProduct(
                 updatedProduct.getNameProduct(),
                 updatedProduct.getPrice(),
                 updatedProduct.getCategory(),
-                updatedProduct.getStock(),
+                stock,
                 updatedProduct.getImageUrl()
         );
         return productRepository.save(existingProduct);
