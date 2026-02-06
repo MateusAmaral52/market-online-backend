@@ -83,7 +83,5 @@ public class Product {
         return imageUrl;
     }
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
+
 }

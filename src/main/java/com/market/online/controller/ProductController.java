@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("/api/products")
 public class ProductController {
 
@@ -25,14 +24,6 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-
-    //Teste geral para chamada do ControllerAdvice
-    /*
-    @GetMapping("/test-error")
-    public void testError() {
-        throw new RuntimeException("Test ControllerAdvice");
-    }
-    */
 
     @PostMapping
     public ResponseEntity<ProductResponseDTO> createProduct(
