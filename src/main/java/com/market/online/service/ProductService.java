@@ -3,9 +3,11 @@ package com.market.online.service;
 import com.market.online.entity.Product;
 import com.market.online.exception.ResourceNotFoundException;
 import com.market.online.repository.ProductRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProductService {
 
     private final ProductRepository productRepository;
@@ -14,23 +16,23 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product saveProduct(Product product){
+    public Product save(Product product){
         return productRepository.save(product);
     }
 
-    public List<Product> findAllProducts(){
+    public List<Product> findAll(){
         return productRepository.findAll();
     }
 
-    public Product findProductById(Long idProduct){
+    public Product findById(Long idProduct){
         return productRepository.findById(idProduct).orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com id: " + idProduct +"!"));
     }
 
-    public Product updateProduct(Long idProduct, Product updatedProduct){
-        Product existingProduct = findProductById(idProduct);
+    public Product update(Long idProduct, Product updatedProduct){
+        Product existingProduct = findById(idProduct);
 
         // Atualizações controladas (sem setter público)
-        existingProduct.update(
+        existingProduct.updateProduct(
                 updatedProduct.getNameProduct(),
                 updatedProduct.getPrice(),
                 updatedProduct.getCategory(),
@@ -40,8 +42,8 @@ public class ProductService {
         return productRepository.save(existingProduct);
     }
 
-    public void deleteProduct(Long idProduct) {
-        Product product = findProductById(idProduct);
+    public void delete(Long idProduct) {
+        Product product = findById(idProduct);
         productRepository.delete(product);
     }
 }

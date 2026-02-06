@@ -10,7 +10,7 @@ public class ProductMapper {
         // evita instanciação
     }
 
-    public static Product producttoEntity(ProductRequestDTO dto){
+    public static Product toEntity(ProductRequestDTO dto){
         return new Product(
                 dto.nameProduct(),
                 dto.price(),
@@ -20,7 +20,7 @@ public class ProductMapper {
         );
     }
 
-    public static ProductResponseDTO producttoResponseDTO(Product product){
+    public static ProductResponseDTO toResponseDTO(Product product){
         return new ProductResponseDTO(
                 product.getIdProduct(),
                 product.getNameProduct(),

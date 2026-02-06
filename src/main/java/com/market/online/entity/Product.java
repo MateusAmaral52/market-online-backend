@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "Products")
 //@Getter   - pode usar este ao invés de adicionar os Getters lá embaixo
 public class Product {
 
@@ -46,7 +46,7 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public void update(String nameProduct,
+    public void updateProduct(String nameProduct,
                        BigDecimal price,
                        ProductCategory category,
                        Integer stock,
