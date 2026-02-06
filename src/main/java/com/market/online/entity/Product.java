@@ -25,7 +25,7 @@ public class Product {
     private ProductCategory category;
 
     @Column(nullable = false)
-    private Integer stock;
+    private Integer stock = 0;
 
     @Column
     private String imageUrl;
@@ -81,5 +81,9 @@ public class Product {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 }

@@ -26,6 +26,14 @@ public class ProductController {
         this.productService = productService;
     }
 
+    //Teste geral para chamada do ControllerAdvice
+    /*
+    @GetMapping("/test-error")
+    public void testError() {
+        throw new RuntimeException("Test ControllerAdvice");
+    }
+    */
+
     @PostMapping
     public ResponseEntity<ProductResponseDTO> createProduct(
             @RequestBody @Valid ProductRequestDTO requestDTO

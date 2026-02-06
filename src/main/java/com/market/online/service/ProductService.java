@@ -16,8 +16,20 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product save(Product product){
+    public Product save(Product product) {
+        product.setStock(resolveStock(product.getStock()));
         return productRepository.save(product);
+    }
+
+    private int resolveStock(Integer stock) {
+        return stock != null ? stock : 0;
+        /*
+        if (stock != null) {
+            return stock;
+        } else {
+            return 0;
+        }
+        */
     }
 
     public List<Product> findAll(){
