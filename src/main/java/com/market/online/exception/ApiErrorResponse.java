@@ -12,6 +12,7 @@ public record ApiErrorResponse (
         Map<String, String> fieldErrors
 
         /*
+        //definição para cada item:
         timestamp → auditoria / debug
         status → HTTP explícito
         error → tipo do erro

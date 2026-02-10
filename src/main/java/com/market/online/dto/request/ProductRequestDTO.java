@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 
 public record ProductRequestDTO(
 
+    /*
     @NotBlank(message = "O Nome do Produto é obrigatório!")
     String nameProduct,
 
@@ -25,6 +26,26 @@ public record ProductRequestDTO(
     Integer stock,
 
     String imageUrl
+    */
 
-) {
+
+    //Após criado o Arquivo de configuração InternationaalizationConfig.java na pasta config,
+    //substituir o códificação acima pela nova estrutura de código apresentada abaixo:
+
+    @NotBlank(message = "{product.name.required}")
+    String nameProduct,
+
+    @NotNull(message = "{product.price.required}")
+    @Positive(message = "{product.price.invalid}")
+    BigDecimal price,
+
+    @NotNull(message = "{product.category.required}")
+    ProductCategory category,
+
+    @Min(value = 0, message = "{product.stock.invalid}")
+    Integer stock,
+
+    String imageUrl
+
+    ){
 }

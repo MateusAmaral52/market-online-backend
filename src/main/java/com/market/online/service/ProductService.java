@@ -28,7 +28,12 @@ public class ProductService {
     //Impede valor zero para produto
     private void validatePrice(BigDecimal price) {
         if (price == null || price.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("O preço do Produto deve ser maior que zero!");
+
+            //throw new IllegalArgumentException("O preço do Produto deve ser maior que zero!");
+            //Após criado o Arquivo de configuração InternationaalizationConfig.java na pasta config,
+            //substituir o códificação acima pela nova estrutura de código apresentada abaixo:
+
+            throw new IllegalArgumentException("{product.price.invalid}");
         }
     }
 
