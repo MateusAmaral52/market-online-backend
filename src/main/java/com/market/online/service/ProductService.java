@@ -1,22 +1,37 @@
 package com.market.online.service;
 
+import com.market.online.dto.response.PageResponse;
 import com.market.online.dto.response.ProductResponseDTO;
+
 import com.market.online.entity.Product;
 import com.market.online.exception.ResourceNotFoundException;
+import com.market.online.mapper.ProductMapper;
 import com.market.online.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
+    //Antigo Constructor apenas para productRepository
+    /*
     public ProductService(ProductRepository productRepository){
         this.productRepository = productRepository;
+    }
+    */
+
+    //Novo Construtor para productRepository e productMapper
+    public ProductService(ProductRepository productRepository,
+                          ProductMapper productMapper) {
+        this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     public Product save(Product product) {
@@ -87,8 +102,30 @@ public class ProductService {
     */
 
     //Código findAllProducts novo, para utilizar novo formato com paginação
+    /*
     public Page<ProductResponseDTO> findAll(Pageable pageable) {
         return productRepository.findAll(pageable)
                 .map(ProductResponseDTO::new);
+    }
+    */
+
+    //Código findAllProducts novo, para utilizar novo formato com paginação
+    //Para melhorar a visulização dos dados no retorno da paginação
+    public PageResponse<ProductResponseDTO> findAll(Pageable pageable) {
+        Page<Product> page = productRepository.findAll(pageable);
+
+        List<ProductResponseDTO> list =
+                page.getContent()
+                        .stream()
+                        .map(productMapper::fromEntity)
+                        .toList();
+
+        return new PageResponse<>(
+                list,
+                page.getNumber(),
+                page.getSize(),
+                page.getTotalElements(),
+                page.getTotalPages()
+        );
     }
 }

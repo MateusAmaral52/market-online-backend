@@ -1,5 +1,6 @@
 package com.market.online.controller;
 
+import com.market.online.dto.response.PageResponse;
 import com.market.online.service.ProductService;
 import com.market.online.dto.request.ProductRequestDTO;
 import com.market.online.dto.response.ProductResponseDTO;
@@ -78,6 +79,7 @@ public class ProductController {
     */
 
     //Novo getAllProducts utilizando paginação
+    /*
     @GetMapping
     public ResponseEntity<Page<ProductResponseDTO>> getAllProducts(
             @RequestParam(defaultValue = "0") int page,
@@ -92,6 +94,14 @@ public class ProductController {
         Pageable pageable = PageRequest.of(page, size, Sort.by(dir, sort));
         Page<ProductResponseDTO> result = productService.findAll(pageable);
         return ResponseEntity.ok(result);
+    }
+    */
+
+    //Novo getAllProducts utilizando paginação
+    //Para melhorar a visulização dos dados no retorno da paginação
+    @GetMapping
+    public ResponseEntity<PageResponse<ProductResponseDTO>> getAllProducts(Pageable pageable){
+        return ResponseEntity.ok(productService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
