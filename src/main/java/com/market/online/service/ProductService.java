@@ -20,13 +20,6 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    //Antigo Constructor apenas para productRepository
-    /*
-    public ProductService(ProductRepository productRepository){
-        this.productRepository = productRepository;
-    }
-    */
-
     //Novo Construtor para productRepository e productMapper
     public ProductService(ProductRepository productRepository,
                           ProductMapper productMapper) {
@@ -45,11 +38,9 @@ public class ProductService {
     //Impede valor zero para produto
     private void validatePrice(BigDecimal price) {
         if (price == null || price.compareTo(BigDecimal.ZERO) <= 0) {
-
             //throw new IllegalArgumentException("O preço do Produto deve ser maior que zero!");
-            //Após criado o Arquivo de configuração InternationaalizationConfig.java na pasta config,
-            //substituir o códificação acima pela nova estrutura de código apresentada abaixo:
-
+            //Após criado o arquivo de configuração InternationalizationConfig.java na pasta config,
+            //foi adicionado a códificação abaixo para essa nova estrutura de código
             throw new IllegalArgumentException("{product.price.invalid}");
         }
     }
@@ -57,13 +48,6 @@ public class ProductService {
     //Controla estoque para não ser inserido nullo. Se não for preenchido salvar com Estoque 0.
     private int resolveStock(Integer stock) {
         return stock != null ? stock : 0;
-        /*
-        if (stock != null) {
-            return stock;
-        } else {
-            return 0;
-        }
-        */
     }
 
     public Product update(Long idProduct, Product updatedProduct){
@@ -93,21 +77,6 @@ public class ProductService {
     public Product findById(Long idProduct){
         return productRepository.findById(idProduct).orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com id: " + idProduct +"!"));
     }
-
-    //Antigo findAllProducts quando utilizava List para retornar todos os Produtos
-    /*
-    public List<Product> findAll(){
-        return productRepository.findAll();
-    }
-    */
-
-    //Código findAllProducts novo, para utilizar novo formato com paginação
-    /*
-    public Page<ProductResponseDTO> findAll(Pageable pageable) {
-        return productRepository.findAll(pageable)
-                .map(ProductResponseDTO::new);
-    }
-    */
 
     //Código findAllProducts novo, para utilizar novo formato com paginação
     //Para melhorar a visulização dos dados no retorno da paginação

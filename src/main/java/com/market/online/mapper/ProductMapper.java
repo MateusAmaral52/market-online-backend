@@ -36,7 +36,7 @@ public class ProductMapper {
         );
     }
 
-    //Para novo findAllProducts utilizando paginação
+    //Para novo findAllProducts utilizando paginação (completa)
     //Para melhorar a visulização dos dados no retorno da paginação
     public ProductResponseDTO fromEntity(Product product) {
         if (product == null)

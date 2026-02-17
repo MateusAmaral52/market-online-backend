@@ -17,7 +17,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    //Após criado o Arquivo de configuração InternationaalizationConfig.java na pasta config,
+    //Após criado o arquivo de configuração InternationalizationConfig.java na pasta config,
     //foi adicionado a códificação abaixo para essa nova estrutura de código
     private final MessageSource messageSource;
 
@@ -31,21 +31,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorResponse> handleValidationErrors(
             MethodArgumentNotValidException ex,
             HttpServletRequest request,
-            //Após criado o Arquivo de configuração InternationaalizationConfig.java na pasta config,
+            //Após criado o arquivo de configuração InternationalizationConfig.java na pasta config,
             //foi adicionado a códificação abaixo para essa nova estrutura de código
             Locale locale
     ){
         Map<String, String> errors = new HashMap<>();
-
-        /*
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String message = error.getDefaultMessage();
-            errors.put(fieldName, message);
-        */
-
-        //Após criado o Arquivo de configuração InternationaalizationConfig.java na pasta config,
-        //substituir o códificação acima pela nova estrutura de código apresentada abaixo:
+        //Após criado o arquivo de configuração InternationalizationConfig.java na pasta config,
+        //foi adicionado a códificação abaixo para essa nova estrutura de código
         ex.getBindingResult().getFieldErrors().forEach(error -> {
             errors.put(
                     error.getField(),
@@ -54,20 +46,8 @@ public class GlobalExceptionHandler {
 
         });
 
-        /*
-        ApiErrorResponse response = new ApiErrorResponse(
-                Instant.now(),
-                HttpStatus.BAD_REQUEST.value(),
-                "Erro de validação!",
-                "Dados de solicitação inválidos!",
-                request.getRequestURI(),
-                errors
-        );
-        return ResponseEntity.badRequest().body(response);
-        */
-
-        //Após criado o Arquivo de configuração InternationaalizationConfig.java na pasta config,
-        //substituir o códificação acima pela nova estrutura de código apresentada abaixo:
+        //Após criado o arquivo de configuração InternationalizationConfig.java na pasta config,
+        //foi adicionado a códificação abaixo para essa nova estrutura de código
         ApiErrorResponse response = new ApiErrorResponse(
                 Instant.now(),
                 HttpStatus.BAD_REQUEST.value(),
@@ -113,33 +93,6 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
-
-    /*
-    //Erro BadRequest Campos Inválidos (Enum / Categoria)
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ApiErrorResponse> handleInvalidEnum(
-            HttpMessageNotReadableException ex,
-            HttpServletRequest request
-    ){
-        ApiErrorResponse response = new ApiErrorResponse(
-                Instant.now(),
-                HttpStatus.BAD_REQUEST.value(),
-                "Erro de validação!",
-                "Valor informado é inválido para um dos campos!",
-                request.getRequestURI(),
-                null
-        );
-        //return ResponseEntity.badRequest().body(response);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-    }
-    */
-
-
-
-
-
-    //Este código abaixo: "handleHttpMessageNotReadable" substitui o
-    //bloco de código apresentado acima: "handleInvalidEnum" que atualmente esta comentado
 
     //Erro Requisição Inválida (BadRequest) - Campos Inválidos (Categoria Inválida / Preço Inválido / JSON Malformado)
     @ExceptionHandler(HttpMessageNotReadableException.class)

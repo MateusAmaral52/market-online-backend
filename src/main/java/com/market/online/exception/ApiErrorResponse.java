@@ -4,21 +4,11 @@ import java.time.Instant;
 import java.util.Map;
 
 public record ApiErrorResponse (
-        Instant timestamp,
-        int status,
-        String error,
-        String message,
-        String path,
-        Map<String, String> fieldErrors
-
-        /*
-        //definição para cada item:
-        timestamp → auditoria / debug
-        status → HTTP explícito
-        error → tipo do erro
-        message → mensagem geral
-        path → endpoint chamado / utilizado
-        fieldErrors → validação detalhada
-        */
+        Instant timestamp, //timestamp → auditoria / debug
+        int status, //status → HTTP explícito
+        String error, //error → tipo do erro
+        String message, //message → mensagem geral
+        String path, //path → endpoint chamado / utilizado
+        Map<String, String> fieldErrors //fieldErrors → validação detalhada
 ) {
 }

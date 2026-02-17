@@ -44,17 +44,6 @@ public class Product {
         this.price = price;
         this.category = category;
         this.stock = stock == null ? 0 : stock;
-        //this.stock = (stock != null) ? stock : 0;
-        /*
-        if (stock == null) {
-
-            this.stock = 0;
-        } else {
-            this.stock = stock;
-        }
-        */
-        //this.stock = Objects.requireNonNullElse(stock, 0);
-        //Se não vier estoque → salva 0 //Se vier → salva o valor informado
         this.imageUrl = imageUrl;
     }
 
@@ -69,17 +58,6 @@ public class Product {
         this.price = price;
         this.category = category;
         this.stock = stock == null ? 0 : stock;
-        //this.stock = (stock != null) ? stock : 0;
-        /*
-        if (stock == null) {
-
-            this.stock = 0;
-        } else {
-            this.stock = stock;
-        }
-        */
-        //this.stock = Objects.requireNonNullElse(stock, 0);
-        //Se não vier estoque → salva 0 //Se vier → salva o valor informado
         this.imageUrl = imageUrl;
     }
 
@@ -102,7 +80,7 @@ public class Product {
         }
      */
 
-    // getters apenas ( sem setters públicos )
+    // getters apenas (sem setters públicos)
     public Long getIdProduct() { return idProduct; }
     public String getNameProduct() { return nameProduct; }
     public BigDecimal getPrice() { return price; }
