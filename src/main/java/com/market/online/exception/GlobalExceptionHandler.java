@@ -148,10 +148,9 @@ public class GlobalExceptionHandler {
             HttpServletRequest request
     ) {
 
-        String message = "Requisição inválida!";
+        String message = "Erro de leitura da requisição!";
 
         Throwable cause = ex.getCause();
-
         if (cause instanceof com.fasterxml.jackson.databind.exc.InvalidFormatException invalidFormat) {
 
             Class<?> targetType = invalidFormat.getTargetType();
