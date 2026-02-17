@@ -25,7 +25,7 @@ public class Product {
     private ProductCategory category;
 
     @Column(nullable = false)
-    private Integer stock = 0;
+    private Integer stock;
 
     @Column
     private String imageUrl;
@@ -38,52 +38,77 @@ public class Product {
                    BigDecimal price,
                    ProductCategory category,
                    Integer stock,
-                   String imageUrl) {
+                   String imageUrl)
+    {
         this.nameProduct = nameProduct;
         this.price = price;
         this.category = category;
-        this.stock = stock;
+        this.stock = stock == null ? 0 : stock;
+        //this.stock = (stock != null) ? stock : 0;
+        /*
+        if (stock == null) {
+
+            this.stock = 0;
+        } else {
+            this.stock = stock;
+        }
+        */
+        //this.stock = Objects.requireNonNullElse(stock, 0);
+        //Se não vier estoque → salva 0 //Se vier → salva o valor informado
         this.imageUrl = imageUrl;
     }
 
+    // comportamento de domínio
     public void updateProduct(String nameProduct,
                        BigDecimal price,
                        ProductCategory category,
                        Integer stock,
-                       String imageUrl) {
+                       String imageUrl)
+    {
         this.nameProduct = nameProduct;
         this.price = price;
         this.category = category;
-        this.stock = stock;
+        this.stock = stock == null ? 0 : stock;
+        //this.stock = (stock != null) ? stock : 0;
+        /*
+        if (stock == null) {
+
+            this.stock = 0;
+        } else {
+            this.stock = stock;
+        }
+        */
+        //this.stock = Objects.requireNonNullElse(stock, 0);
+        //Se não vier estoque → salva 0 //Se vier → salva o valor informado
         this.imageUrl = imageUrl;
     }
 
-    // getters apenas (sem setters públicos)
-    public Long getIdProduct() {
-        return idProduct;
-    }
+    // PROXIMA ETAPA (ADICIONAR E OU REMOVER DO ESTOQUE) PARA DESENVOLVIMENTO FUTURO
+    /*
+        // adicionar quantidade ao estoque
+        public void increaseStock(int quantity){
+            this.stock += quantity;
+        }
 
-    public String getNameProduct() {
-        return nameProduct;
-    }
+        // remover quantidade do estoque
+        public void decreaseStock(int quantity){
+            if(quantity <= 0)
+                throw new IllegalArgumentException("Quantidade inválida!!!");
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+            if(quantity > stock)
+                throw new IllegalArgumentException("Estoque insuficiente!!!");
 
-    public ProductCategory getCategory() {
-        return category;
-    }
+            this.stock -= quantity;
+        }
+     */
 
-    public Integer getStock() {
-        return stock;
-    }
+    // getters apenas ( sem setters públicos )
+    public Long getIdProduct() { return idProduct; }
+    public String getNameProduct() { return nameProduct; }
+    public BigDecimal getPrice() { return price; }
+    public ProductCategory getCategory() { return category; }
+    public Integer getStock() { return stock; }
+    public String getImageUrl() { return imageUrl; }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
+    public void setStock(Integer stock) { this.stock = stock; }
 }

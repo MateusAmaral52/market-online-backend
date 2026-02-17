@@ -1,12 +1,14 @@
 package com.market.online.service;
 
+import com.market.online.dto.response.ProductResponseDTO;
 import com.market.online.entity.Product;
 import com.market.online.exception.ResourceNotFoundException;
 import com.market.online.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 public class ProductService {
@@ -49,14 +51,6 @@ public class ProductService {
         */
     }
 
-    public List<Product> findAll(){
-        return productRepository.findAll();
-    }
-
-    public Product findById(Long idProduct){
-        return productRepository.findById(idProduct).orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com id: " + idProduct +"!"));
-    }
-
     public Product update(Long idProduct, Product updatedProduct){
         Product existingProduct = findById(idProduct);
 
@@ -79,5 +73,22 @@ public class ProductService {
     public void delete(Long idProduct) {
         Product product = findById(idProduct);
         productRepository.delete(product);
+    }
+
+    public Product findById(Long idProduct){
+        return productRepository.findById(idProduct).orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com id: " + idProduct +"!"));
+    }
+
+    //Antigo findAllProducts quando utilizava List para retornar todos os Produtos
+    /*
+    public List<Product> findAll(){
+        return productRepository.findAll();
+    }
+    */
+
+    //Código findAllProducts novo, para utilizar novo formato com paginação
+    public Page<ProductResponseDTO> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable)
+                .map(ProductResponseDTO::new);
     }
 }
